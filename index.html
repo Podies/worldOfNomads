@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/4.2.0/normalize.min.css">
+  <link rel="stylesheet" type="text/css" href="main.css">
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700|Rokkitt:400,700" rel="stylesheet">
+  <link rel="shortcut icon" type="image/png" href="Digital-Nomad-favicon.png">
+	<title>World Of Nomads</title>
+</head>
+<body>
+    <img src="04bali-850x425.jpg" class="background"/>
+    <div class="opacity-box"></div>
+    <div class="content">
+      <div class="logo">
+      <img src="Digital-Nomad-Logo.png" class="logo" />
+      </div>
+      <h1>We are coming soon!</h1>
+      <div>
+    	<p id="status">Please subscribe to get the latest updates.</p>
+      </div>
+        <form action="http://podies.herokuapp.com/worldofnomads/signup" method="POST">
+          <div class="subscribe-form" id="inputForm">
+        	  <input type="email" id="myEmail" name="email" style="min-width: 300px;" placeholder="Enter your email ID" />
+            <input type="submit" onclick="myFunction(event)" value="Subscribe">
+          </div>
+        </form>
+    </div>
+    <script>
+      function myFunction(){
+        event.preventDefault();
+        var myEmail = document.getElementById('myEmail').value;
+        var sendEmail = {"email" : myEmail};
+        var xhr = new XMLHttpRequest();
+        var url = "http://podies.herokuapp.com/worldofnomads/signup";
+        xhr.open('POST', url, true);
+        xhr.setRequestHeader("Content-type", "application/json")
+
+        xhr.onreadystatechange = function(){
+          if (xhr.readyState == 4 && xhr.status == 200) {
+            var responseText = xhr.responseText;
+            document.getElementById("status").innerHTML = "Thank You for Subscribing, we will keep you posted.";
+            var subscribe = document.getElementById("inputForm");
+            subscribe.style.display="none";
+          }
+        }
+        xhr.send(JSON.stringify(sendEmail)); 
+      
+        // get email value
+        // send email in ajax call
+        // on success display message
+        // xhr
+      }
+    </script>
+</body>
+</html>
